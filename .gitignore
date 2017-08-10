@@ -50,3 +50,5 @@ bin
 
 # Docs in LaTeX are not uploaded
 docs/latex
+
+numerical_analysis
