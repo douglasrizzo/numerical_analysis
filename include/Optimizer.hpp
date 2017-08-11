@@ -39,9 +39,9 @@ class Optimizer {
   //! \return the point at which the function intercepts the x-axis
   double findRoot(const std::function<double(double)> &f,
                   double x,
-                  double error,
-                  int max_iters,
-                  double learnRate, bool verbose) {
+                  double error = 1e-8,
+                  int max_iters = 1000,
+                  double learnRate = 1, bool verbose = false) {
     double f_val = f(x);
     int iter = 0;
 
@@ -71,10 +71,10 @@ class Optimizer {
   //! \return the point at which the function is minimal
   double minimize(const std::function<double(double)> &f,
                   double x,
-                  double error,
-                  int max_iters,
-                  double learnRate,
-                  bool verbose) {
+                  double error = 1e-8,
+                  int max_iters = 1000,
+                  double learnRate = 1,
+                  bool verbose = false) {
     int iter = 0;
     double d = error + 1;
 
@@ -107,10 +107,10 @@ class Optimizer {
   std::tuple<double, double> minimize(const std::function<double(double, double)> &f,
                                       double x,
                                       double y,
-                                      double error,
-                                      int max_iters,
-                                      double learnRate,
-                                      bool verbose) {
+                                      double error = 1e-8,
+                                      int max_iters = 1000,
+                                      double learnRate = 1,
+                                      bool verbose = false) {
     int iter = 0;
     double d = error + 1;
 
