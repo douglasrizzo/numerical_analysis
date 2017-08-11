@@ -17,6 +17,7 @@ class Optimizer {
  private:
   int iterations = 0;
   double error = 0;
+  string endReason = "You didn't run any optimization yet!";
 
  public:
   //! \return number of iterations until convergence
@@ -27,6 +28,10 @@ class Optimizer {
   //! \return error of approximation
   double getError() const {
     return error;
+  }
+
+  const string &getEndReason() const {
+    return endReason;
   }
 
   //! Numerically searches for the root of a function via Newton-Raphson method
@@ -42,21 +47,33 @@ class Optimizer {
                   double error = 1e-8,
                   int max_iters = 1000,
                   double learnRate = 1, bool verbose = false) {
+    endReason = "You didn't run any optimization yet!";
+    iterations = 0;
     double f_val = f(x);
-    int iter = 0;
 
-    while (iter ++ < max_iters and fabs(f_val) > error) {
+    while (true) {
       double aux = x + learnRate * - f_val / FunctionUtils::derivative(f, x);
-      if (aux == x)
+      if (aux == x) {
+        this->endReason = "No change in x from previous iteration";
         break;
-      x = aux;
+      }
 
+      iterations ++;
+      x = aux;
       f_val = f(x);
       if (verbose) {
-        cout << "Iteration " << iter << ": x = " << x << ", f(x) = " << f_val << '\n';
+        cout << "Iteration " << iterations << ": x = " << x << ", f(x) = " << f_val << '\n';
+      }
+
+      if (iterations >= max_iters) {
+        this->endReason = "Maximum number of iterations reached";
+        break;
+      }
+      if (fabs(f_val) < error) {
+        this->endReason = "Minimum error threshold reached";
+        break;
       }
     }
-    this->iterations = iter;
     this->error = fabs(f_val);
     return x;
   }
@@ -75,27 +92,39 @@ class Optimizer {
                   int max_iters = 1000,
                   double learnRate = 1,
                   bool verbose = false) {
-    int iter = 0;
+    endReason = "You didn't run any optimization yet!";
+    iterations = 0;
     double d = error + 1;
 
-    while (iter ++ < max_iters and fabs(d) > error) {
+    while (true) {
       double aux = x - learnRate * d;
-      if (aux == x)
+      if (aux == x) {
+        this->endReason = "No change in x from previous iteration";
         break;
+      }
+      iterations ++;
       x = aux;
       d = FunctionUtils::derivative(f, x);
 
       if (verbose) {
-        cout << "Iteration " << iter << ": x = " << x << ", f'(x) = " << d << '\n';
+        cout << "Iteration " << iterations << ": x = " << x << ", f'(x) = " << d << '\n';
+      }
+
+      if (iterations >= max_iters) {
+        this->endReason = "Maximum number of iterations reached";
+        break;
+      }
+      if (fabs(d) < error) {
+        this->endReason = "Minimum error threshold reached";
+        break;
       }
     }
-    this->iterations = iter;
     this->error = fabs(d);
 
     return x;
   }
 
-  //! Two-dimentional function minimization procedure via the gradient descent method
+  //! Two-dimensional function minimization procedure via the gradient descent method
   //! \param f a function
   //! \param x the initial x point to start the search
   //! \param y the initial y point to start the search
@@ -111,23 +140,35 @@ class Optimizer {
                                       int max_iters = 1000,
                                       double learnRate = 1,
                                       bool verbose = false) {
-    int iter = 0;
+    endReason = "You didn't run any optimization yet!";
+    iterations = 0;
     double d = error + 1;
 
-    while (iter ++ < max_iters and fabs(d) > error) {
+    while (true) {
       double aux = x - learnRate * d;
       double auy = y - learnRate * d;
-      if (aux == x and auy == y)
+      if (aux == x and y == auy) {
+        this->endReason = "No change in x and y from previous iteration";
         break;
+      }
+      iterations ++;
       x = aux;
       y = auy;
       d = FunctionUtils::derivative(f, x, y);
 
       if (verbose) {
-        cout << "Iteration " << iter << ": x = " << x << ", y = " << y << ", f'(x, y) = " << d << '\n';
+        cout << "Iteration " << iterations << ": x = " << x << ", y = " << y << ", f'(x, y) = " << d << '\n';
+      }
+
+      if (iterations >= max_iters) {
+        this->endReason = "Maximum number of iterations reached";
+        break;
+      }
+      if (fabs(d) < error) {
+        this->endReason = "Minimum error threshold reached";
+        break;
       }
     }
-    this->iterations = iter;
     this->error = fabs(d);
 
     return {x, y};
