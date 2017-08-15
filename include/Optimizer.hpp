@@ -14,25 +14,20 @@
 
 //! Numerical optimizer specialized in finding roots and minima of functions
 class Optimizer {
- private:
+private:
   int iterations = 0;
   double error = 0;
   string endReason = "You didn't run any optimization yet!";
 
- public:
+public:
   //! \return number of iterations until convergence
-  int getIterations() const {
-    return iterations;
-  }
+  int getIterations() const { return iterations; }
 
   //! \return error of approximation
-  double getError() const {
-    return error;
-  }
+  double getError() const { return error; }
 
-  const string &getEndReason() const {
-    return endReason;
-  }
+  //! \return
+  const string &getEndReason() const { return endReason; }
 
   //! Numerically searches for the root of a function via Newton-Raphson method
   //! \param f a function
@@ -52,13 +47,13 @@ class Optimizer {
     double f_val = f(x);
 
     while (true) {
-      double aux = x + learnRate * - f_val / FunctionUtils::derivative(f, x);
+      double aux = x + learnRate * -f_val / FunctionUtils::derivative(f, x);
       if (aux == x) {
         this->endReason = "No change in x from previous iteration";
         break;
       }
 
-      iterations ++;
+      iterations++;
       x = aux;
       f_val = f(x);
       if (verbose) {
@@ -102,7 +97,7 @@ class Optimizer {
         this->endReason = "No change in x from previous iteration";
         break;
       }
-      iterations ++;
+      iterations++;
       x = aux;
       d = FunctionUtils::derivative(f, x);
 
@@ -151,7 +146,7 @@ class Optimizer {
         this->endReason = "No change in x and y from previous iteration";
         break;
       }
-      iterations ++;
+      iterations++;
       x = aux;
       y = auy;
       d = FunctionUtils::derivative(f, x, y);

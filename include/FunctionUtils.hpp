@@ -36,6 +36,8 @@ class FunctionUtils {
   //! \return the derivative of the function
   static double derivative(const function<double(double, double)> &f, double x, double y) {
     double h = sqrtMachineEpsilon * x;
+    // for 2D functions, the symmetrized derivative approximation worked better,
+    // so I kept it
     return (f(x + h, y + h) - f(x - h, y - h)) / 2 * h;
   }
 };
