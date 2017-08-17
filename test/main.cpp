@@ -1,31 +1,20 @@
-#include <iostream>
-#include <cmath>
 #include "FunctionUtils.hpp"
 #include "Optimizer.hpp"
 
 using namespace std;
 
-//! x^2
 //! \param x
 //! \return x^2
-double fa(double x) {
-  return x * x;
-}
+double fa(double x) { return x * x; }
 
-//! x ^ 3 - 2x ^ 2 + 2
 //! \param x
 //! \return x ^ 3 - 2x ^ 2 + 2
-double fb(double x) {
-  return pow(x, 3) - 2 * pow(x, 2) + 2;
-}
+double fb(double x) { return pow(x, 3) - 2 * pow(x, 2) + 2; }
 
-//! (1 - x) ^ 2 + (1 - y) ^ 2
 //! \param x
 //! \param y
 //! \return (1 - x) ^ 2 + (1 - y) ^ 2
-double fc(double x, double y) {
-  return pow((1 - x), 2) + pow((1 - y), 2);
-}
+double fc(double x, double y) { return pow((1 - x), 2) + pow((1 - y), 2); }
 
 //! Calculates Rosenbrock's function
 //! \param x

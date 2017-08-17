@@ -1,7 +1,7 @@
 /**
  * @author Douglas De Rizzo Meneghetti (douglasrizzom@gmail.com)
- * @date   2017-8-8
  * @brief Utility functions for numerical functions
+ * @date   2017-8-8
  */
 
 #ifndef NUMERICAL_ANALYSIS_FUNCTIONUTILS_HPP
@@ -9,17 +9,18 @@
 
 #include <functional>
 #include <limits>
+#include <cmath>
 
 using namespace std;
 
 //! Utility functions for numerical functions
 class FunctionUtils {
  private:
-  //! A shortcut for the root of the machine epsilon, used in the calculating a small but precise value for h in the derivatives
+  //! A shortcut for the root of the machine epsilon, used for calculating a
+  //! small but precise value for h in the derivatives
   static double const sqrtMachineEpsilon;
 
  public:
-
   //! Numerically approximates the derivative of a single-variable function
   //! \param f a function
   //! \param x the point at which the derivative is to be calculated

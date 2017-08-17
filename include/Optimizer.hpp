@@ -7,10 +7,10 @@
 #ifndef NUMERICAL_ANALYSIS_OPTIMIZER_HPP
 #define NUMERICAL_ANALYSIS_OPTIMIZER_HPP
 
-#include <functional>
-#include <cmath>
-#include <iostream>
 #include "FunctionUtils.hpp"
+#include <cmath>
+#include <functional>
+#include <iostream>
 
 //! Numerical optimizer specialized in finding roots and minima of functions
 class Optimizer {
@@ -26,7 +26,7 @@ public:
   //! \return error of approximation
   double getError() const { return error; }
 
-  //! \return
+  //! \return reason for ending the process
   const string &getEndReason() const { return endReason; }
 
   //! Numerically searches for the root of a function via Newton-Raphson method
@@ -37,27 +37,26 @@ public:
   //! \param learnRate the learning rate of the search
   //! \param verbose whether to print a short summary of the search at every iteration
   //! \return the point at which the function intercepts the x-axis
-  double findRoot(const std::function<double(double)> &f,
-                  double x,
-                  double error = 1e-8,
-                  int max_iters = 1000,
+  double findRoot(const std::function<double(double)> &f, double x,
+                  double error = 1e-8, int max_iters = 1000,
                   double learnRate = 1, bool verbose = false) {
     endReason = "You didn't run any optimization yet!";
     iterations = 0;
-    double f_val = f(x);
+    double f_val;
 
     while (true) {
-      double aux = x + learnRate * -f_val / FunctionUtils::derivative(f, x);
+      f_val = f(x);
+      double aux = x + learnRate * - f_val / FunctionUtils::derivative(f, x);
       if (aux == x) {
         this->endReason = "No change in x from previous iteration";
         break;
       }
 
-      iterations++;
+      iterations ++;
       x = aux;
-      f_val = f(x);
       if (verbose) {
-        cout << "Iteration " << iterations << ": x = " << x << ", f(x) = " << f_val << '\n';
+        cout << "Iteration " << iterations << ": x = " << x
+             << ", f(x) = " << f_val << '\n';
       }
 
       if (iterations >= max_iters) {
@@ -83,26 +82,25 @@ public:
   //! \return the point at which the function is minimal
   double minimize(const std::function<double(double)> &f,
                   double x,
-                  double error = 1e-8,
-                  int max_iters = 1000,
-                  double learnRate = 1,
-                  bool verbose = false) {
+                  double error = 1e-8, int max_iters = 1000,
+                  double learnRate = 1, bool verbose = false) {
     endReason = "You didn't run any optimization yet!";
     iterations = 0;
-    double d = error + 1;
+    double d;
 
     while (true) {
+      d = FunctionUtils::derivative(f, x);
       double aux = x - learnRate * d;
       if (aux == x) {
         this->endReason = "No change in x from previous iteration";
         break;
       }
-      iterations++;
+      iterations ++;
       x = aux;
-      d = FunctionUtils::derivative(f, x);
 
       if (verbose) {
-        cout << "Iteration " << iterations << ": x = " << x << ", f'(x) = " << d << '\n';
+        cout << "Iteration " << iterations << ": x = " << x << ", f'(x) = " << d
+             << '\n';
       }
 
       if (iterations >= max_iters) {
@@ -137,34 +135,40 @@ public:
                                       bool verbose = false) {
     endReason = "You didn't run any optimization yet!";
     iterations = 0;
-    double d = error + 1;
+    double dfdx, dfdy;
 
     while (true) {
-      double aux = x - learnRate * d;
-      double auy = y - learnRate * d;
+      dfdx = FunctionUtils::partialDerivative(f, x, y, 0);
+      dfdy = FunctionUtils::partialDerivative(f, x, y, 1);
+
+      double aux = x - learnRate * dfdx;
+      double auy = y - learnRate * dfdy;
+
       if (aux == x and y == auy) {
         this->endReason = "No change in x and y from previous iteration";
         break;
       }
-      iterations++;
+
+      iterations ++;
+
       x = aux;
       y = auy;
-      d = FunctionUtils::derivative(f, x, y);
 
-      if (verbose) {
-        cout << "Iteration " << iterations << ": x = " << x << ", y = " << y << ", f'(x, y) = " << d << '\n';
+      if (verbose and iterations % 1000000 == 0) {
+        cout << "x = " << x << ", y = " << y
+             << ", f'(x, y) = (" << dfdx << ", " << dfdy << ")\tIteration " << iterations << endl;
       }
 
       if (iterations >= max_iters) {
         this->endReason = "Maximum number of iterations reached";
         break;
       }
-      if (fabs(d) < error) {
+      if (fabs(dfdx) + fabs(dfdy) < error) {
         this->endReason = "Minimum error threshold reached";
         break;
       }
     }
-    this->error = fabs(d);
+    this->error = (fabs(dfdx) + fabs(dfdy) / 2);
 
     return {x, y};
   }
