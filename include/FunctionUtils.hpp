@@ -29,16 +29,21 @@ class FunctionUtils {
     return (f(x + h) - f(x)) / h;
   }
 
-  //! Numerically approximates the derivative of a two-dimensional function
+  //! Numerically approximates the partial derivative of a two-dimensional function
   //! \param f a function
   //! \param x the first point at which the derivative is to be calculated
   //! \param y the second point at which the derivative is to be calculated
-  //! \return the derivative of the function
-  static double derivative(const function<double(double, double)> &f, double x, double y) {
-    double h = sqrtMachineEpsilon * x;
-    // for 2D functions, the symmetrized derivative approximation worked better,
-    // so I kept it
-    return (f(x + h, y + h) - f(x - h, y - h)) / 2 * h;
+  //! \param which 0 to differentiate x, otherwise y
+  //! \return the partial derivative of the function
+  static double partialDerivative(const function<double(double, double)> &f, double x,
+                                  double y, int which = 0) {
+    double h = sqrtMachineEpsilon;
+    if (which == 0) {
+      h *= x;
+      return (f(x, y) - f(x - h, y)) / h;
+    }
+    h *= y;
+    return (f(x, y) - f(x, y - h)) / h;
   }
 };
 
