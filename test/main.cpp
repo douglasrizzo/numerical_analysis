@@ -98,6 +98,66 @@ int main() {
   //  testRoots(x, error, result, iters, d2_ret, learnRateFraction, o);
   //  testMinimization(x, y, error, result, iters, d2_ret, learnRateFraction, o);
 
+  double s1 = expm1(1.0), s2 = M_PI_4, s3 = sqrt(M_PI) / 2 * erf(high);
+
+  cout << expm1(1.0) << endl;
+  cout << o.integrate(fe, low, high, quadratures, Optimizer::RECTANGLE) << endl;
+  cout << o.integrate(fe, low, high, quadratures, Optimizer::TRAPEZOID) << endl;
+  cout << o.integrate(fe, low, high, quadratures, Optimizer::SIMPSON) << endl;
+  try {
+    cout << o.adaptiveIntegration(fe, low, high, Optimizer::RECTANGLE, s1) << endl;
+  } catch (const runtime_error &x) {
+    cout << x.what() << endl;
+  }
+  try {
+    cout << o.adaptiveIntegration(fe, low, high, Optimizer::TRAPEZOID, s1) << endl;
+  } catch (const runtime_error &x) {
+    cout << x.what() << endl;
+  }
+  try {
+    cout << o.adaptiveIntegration(fe, low, high, Optimizer::SIMPSON, s1) << endl;
+  } catch (const runtime_error &x) {
+    cout << x.what() << endl;
+  }
+
+  cout << s2 << endl;
+  cout << o.integrate(ff, low, high, quadratures, Optimizer::RECTANGLE) << endl;
+  cout << o.integrate(ff, low, high, quadratures, Optimizer::TRAPEZOID) << endl;
+  cout << o.integrate(ff, low, high, quadratures, Optimizer::SIMPSON) << endl;
+  try {
+    cout << o.adaptiveIntegration(ff, low, high, Optimizer::RECTANGLE, s2) << endl;
+  } catch (const runtime_error &x) {
+    cout << x.what() << endl;
+  }
+  try {
+    cout << o.adaptiveIntegration(ff, low, high, Optimizer::TRAPEZOID, s2) << endl;
+  } catch (const runtime_error &x) {
+    cout << x.what() << endl;
+  }
+  try {
+    cout << o.adaptiveIntegration(ff, low, high, Optimizer::SIMPSON, s2) << endl;
+  } catch (const runtime_error &x) {
+    cout << x.what() << endl;
+  }
+
+  cout << s3 << endl;
+  cout << o.integrate(fg, low, high, quadratures, Optimizer::RECTANGLE) << endl;
+  cout << o.integrate(fg, low, high, quadratures, Optimizer::TRAPEZOID) << endl;
+  cout << o.integrate(fg, low, high, quadratures, Optimizer::SIMPSON) << endl;
+  try {
+    cout << o.adaptiveIntegration(fg, low, high, Optimizer::RECTANGLE, s3) << endl;
+  } catch (const runtime_error &x) {
+    cout << x.what() << endl;
+  }
+  try {
+    cout << o.adaptiveIntegration(fg, low, high, Optimizer::TRAPEZOID, s3) << endl;
+  } catch (const runtime_error &x) {
+    cout << x.what() << endl;
+  }
+  try {
+    cout << o.adaptiveIntegration(fg, low, high, Optimizer::SIMPSON, s3) << endl;
+  } catch (const runtime_error &x) {
+    cout << x.what() << endl;
   }
 
   return 0;
