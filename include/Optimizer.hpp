@@ -1,7 +1,7 @@
 /**
  * @author Douglas De Rizzo Meneghetti (douglasrizzom@gmail.com)
+ * @brief  Numerical optimizer specialized in finding roots, minima and integrals of functions
  * @date   2017-8-11
- * @brief Numerical optimizer specialized in finding roots and minima of functions
  */
 
 #ifndef NUMERICAL_ANALYSIS_OPTIMIZER_HPP
@@ -12,14 +12,28 @@
 #include <functional>
 #include <iostream>
 
-//! Numerical optimizer specialized in finding roots and minima of functions
+//! Numerical optimizer specialized in finding roots, minima and integrals of functions
 class Optimizer {
-private:
+ private:
   int iterations = 0;
   double error = 0;
   string endReason = "You didn't run any optimization yet!";
 
-public:
+  static double rectangleRule(const std::function<double(double)> &f, double a, double b) {
+    return (b - a) * f((a + b) / 2);
+  }
+
+  static double trapezoid(const std::function<double(double)> &f, double a, double b) {
+    return (b - a) * (f(a) + f(b)) / 2;
+  }
+
+  static double simpson(const std::function<double(double)> &f, double a, double b) {
+    return (b - a) * (f(a) + 4 * f((a + b) / 2) + f(b)) / 6;
+  }
+
+ public:
+  enum IntegrationMethod { RECTANGLE, TRAPEZOID, SIMPSON };
+
   //! \return number of iterations until convergence
   int getIterations() const { return iterations; }
 
@@ -172,6 +186,69 @@ public:
 
     return {x, y};
   }
+
+  double integrate(const std::function<double(double)> &f,
+                   double low,
+                   double high,
+                   long int points = 40,
+                   IntegrationMethod method = SIMPSON) {
+
+    if (low == high) {
+      throw runtime_error("Lower bound of integration = Higher bound");
+    }
+    if (low > high) {
+      double temp = low;
+      low = high;
+      high = temp;
+    }
+
+    std::function<double(std::function<double(double)> approx, double, double)> approx;
+
+    if (method == SIMPSON) approx = simpson;
+    else if (method == RECTANGLE)approx = rectangleRule;
+    else if (method == TRAPEZOID)approx = trapezoid;
+    else throw runtime_error("Unsupported integration method");
+
+    double sum = 0;
+    double step = (high - low) / points;
+
+    if (step < 1e-8)
+      throw runtime_error("Step size of " + to_string(step) + " is too small to be precise");
+
+    for (int i = 0; i < points; i ++)
+      sum += approx(f, low + (i * step), low + ((i + 1) * step));
+
+    return sum;
+  }
+
+  double adaptiveIntegration(const function<double(double)> &f,
+                             double low,
+                             double high,
+                             IntegrationMethod method,
+                             double result,
+                             double error = 1e-6) throw(runtime_error) {
+    iterations = 0;
+    double x;
+    long int quadratures = 1;
+
+    do {
+      if (iterations > 24)
+        throw runtime_error(
+            "Adaptive integration failed to converge\n\tResult: " + to_string(x) + "\n\tError: "
+                + to_string(this->error) + "\n\tIterations: " + to_string(iterations) + "\n\tQuadratures: "
+                + to_string(quadratures));
+
+      long int oldQuadratures = quadratures;
+      quadratures *= 2;
+      if (oldQuadratures > quadratures)
+        throw runtime_error("Overflow in the number of quadratures");
+
+      iterations ++;
+      x = integrate(f, low, high, quadratures, method);
+      this->error = fabs(x - result);
+    } while (this->error > error);
+    return x;
+  }
 };
 
-#endif //NUMERICAL_ANALYSIS_OPTIMIZER_HPP
+#endif // NUMERICAL_ANALYSIS_OPTIMIZER_HPP
