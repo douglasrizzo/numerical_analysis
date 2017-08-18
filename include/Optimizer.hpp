@@ -53,7 +53,7 @@ class Optimizer {
   //! \return the point at which the function intercepts the x-axis
   double findRoot(const std::function<double(double)> &f, double x,
                   double error = 1e-8, int max_iters = 1000,
-                  double learnRate = 1, bool verbose = false) {
+                  double learnRate = 1, bool verbose = false) throw(runtime_error) {
     endReason = "You didn't run any optimization yet!";
     iterations = 0;
     double f_val;
@@ -74,8 +74,9 @@ class Optimizer {
       }
 
       if (iterations >= max_iters) {
-        this->endReason = "Maximum number of iterations reached";
-        break;
+        string message = "Maximum number of iterations reached";
+        this->endReason = message;
+        throw runtime_error(message);
       }
       if (fabs(f_val) < error) {
         this->endReason = "Minimum error threshold reached";
@@ -97,7 +98,7 @@ class Optimizer {
   double minimize(const std::function<double(double)> &f,
                   double x,
                   double error = 1e-8, int max_iters = 1000,
-                  double learnRate = 1, bool verbose = false) {
+                  double learnRate = 1, bool verbose = false) throw(runtime_error) {
     endReason = "You didn't run any optimization yet!";
     iterations = 0;
     double d;
@@ -118,8 +119,9 @@ class Optimizer {
       }
 
       if (iterations >= max_iters) {
-        this->endReason = "Maximum number of iterations reached";
-        break;
+        string message = "Maximum number of iterations reached";
+        this->endReason = message;
+        throw runtime_error(message);
       }
       if (fabs(d) < error) {
         this->endReason = "Minimum error threshold reached";
@@ -146,7 +148,7 @@ class Optimizer {
                                       double error = 1e-8,
                                       int max_iters = 1000,
                                       double learnRate = 1,
-                                      bool verbose = false) {
+                                      bool verbose = false) throw(runtime_error) {
     endReason = "You didn't run any optimization yet!";
     iterations = 0;
     double dfdx, dfdy;
@@ -174,8 +176,9 @@ class Optimizer {
       }
 
       if (iterations >= max_iters) {
-        this->endReason = "Maximum number of iterations reached";
-        break;
+        string message = "Maximum number of iterations reached";
+        this->endReason = message;
+        throw runtime_error(message);
       }
       if (fabs(dfdx) + fabs(dfdy) < error) {
         this->endReason = "Minimum error threshold reached";
@@ -191,7 +194,7 @@ class Optimizer {
                    double low,
                    double high,
                    long int points = 40,
-                   IntegrationMethod method = SIMPSON) {
+                   IntegrationMethod method = SIMPSON) throw(runtime_error) {
 
     if (low == high) {
       throw runtime_error("Lower bound of integration = Higher bound");
@@ -202,7 +205,7 @@ class Optimizer {
       high = temp;
     }
 
-    std::function<double(std::function<double(double)> approx, double, double)> approx;
+    std::function<double(std::function<double(double)>, double, double)> approx;
 
     if (method == SIMPSON) approx = simpson;
     else if (method == RECTANGLE)approx = rectangleRule;
