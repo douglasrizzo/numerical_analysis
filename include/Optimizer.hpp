@@ -240,6 +240,22 @@ class Optimizer {
     } while (this->error > error);
     return x;
   }
+
+  double realAdaptiveIntegration(const function<double(double)> &f,
+                                 double a,
+                                 double b,
+                                 IntegrationMethod method,
+                                 double error = 1e-6) throw(runtime_error) {
+    while (true) {
+      double meio = (b + a) / 2;
+      double i1 = integrate(f, a, b, 1, method),
+          i2 = integrate(f, a, meio, 1, method) + integrate(f, meio, b, 1, method);
+      if (fabs(i1 - i2) > error) {
+        return realAdaptiveIntegration(f, a, meio, method, error) + realAdaptiveIntegration(f, meio, b, method, error);
+      }
+      return i2;
+    }
+  }
 };
 
 #endif // NUMERICAL_ANALYSIS_OPTIMIZER_HPP
