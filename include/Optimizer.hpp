@@ -19,18 +19,6 @@ class Optimizer {
   double error = 0;
   string endReason = "You didn't run any optimization yet!";
 
-  static double rectangleRule(const std::function<double(double)> &f, double a, double b) {
-    return (b - a) * f((a + b) / 2);
-  }
-
-  static double trapezoid(const std::function<double(double)> &f, double a, double b) {
-    return (b - a) * (f(a) + f(b)) / 2;
-  }
-
-  static double simpson(const std::function<double(double)> &f, double a, double b) {
-    return (b - a) * (f(a) + 4 * f((a + b) / 2) + f(b)) / 6;
-  }
-
  public:
   enum IntegrationMethod { RECTANGLE, TRAPEZOID, SIMPSON };
 
@@ -207,9 +195,9 @@ class Optimizer {
 
     std::function<double(std::function<double(double)>, double, double)> approx;
 
-    if (method == SIMPSON) approx = simpson;
-    else if (method == RECTANGLE)approx = rectangleRule;
-    else if (method == TRAPEZOID)approx = trapezoid;
+    if (method == SIMPSON) approx = FunctionUtils::simpsonRule;
+    else if (method == RECTANGLE)approx = FunctionUtils::rectangleRule;
+    else if (method == TRAPEZOID)approx = FunctionUtils::trapezoidRule;
     else throw runtime_error("Unsupported integration method");
 
     double sum = 0;

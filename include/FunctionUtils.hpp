@@ -46,6 +46,18 @@ class FunctionUtils {
     h *= y;
     return (f(x, y) - f(x, y - h)) / h;
   }
+
+  static double rectangleRule(const std::function<double(double)> &f, double a, double b) {
+    return (b - a) * f((a + b) / 2);
+  }
+
+  static double trapezoidRule(const std::function<double(double)> &f, double a, double b) {
+    return (b - a) * (f(a) + f(b)) / 2;
+  }
+
+  static double simpsonRule(const std::function<double(double)> &f, double a, double b) {
+    return (b - a) * (f(a) + 4 * f((a + b) / 2) + f(b)) / 6;
+  }
 };
 
 const double FunctionUtils::sqrtMachineEpsilon = sqrt(numeric_limits<double>::epsilon());
