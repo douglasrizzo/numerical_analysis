@@ -1,0 +1,54 @@
+%!TEX root = latex/refman.tex
+
+\chapter{Exercícios}
+
+A integração numérica tradicional e adaptativa foram testados utilizando as funções do ponto médio, trapezóide e Simpson nas equações \eqref{eq:ex1}, \eqref{eq:ex2} e \eqref{eq:ex3}. O erro na aproximação foi calculado subtraindo-se o valor real da integral pelo valor aproximado. O erro utilizado na integração adaptativa foi de \(1e-8\).
+
+\begin{equation}\label{eq:ex1}
+  \int_0^1 e^xdx = e^x - 1 \approx 1.71828182846
+\end{equation}
+
+\begin{equation}\label{eq:ex2}
+  \int_0^1 \sqrt{1-x^2}dx = \frac{\pi}{4} \approx 0.785398163397
+\end{equation}
+
+\begin{equation}\label{eq:ex3}
+  \int_0^1 e^{-x^2}dx = \frac{\sqrt{\pi}}{2} \cdot erf(1) \approx 0.746824132812
+\end{equation}
+
+\chapter{Resultados}
+
+Os resultados dos experimentos são listados abaixo. É possível perceber maior precisão média dos métodos adaptativos, sendo o método de Simpson o mais preciso de todos.
+
+\begin{verbatim}
+Integrating e^x...
+1.71828182846 "true" value
+1.71828003858 (error = 1.78987559951e-06)   rectangle
+1.71828540821 (error = 3.57975231791e-06)   trapezoid
+1.71828182846 (error = 3.72812891669e-13)   simpson
+1.71828182763 (error = 8.25125745507e-10)   adaptive rectangle (quadratures: 19854)
+1.71828182909 (error = 6.26209306631e-10)   adaptive trapezoid (quadratures: 31210)
+1.71828182846 (error = 2.2226664953e-12)    adaptive simpson   (quadratures: 254)
+Integrating sqrt(1 - pow(x, 2))...
+0.785398163397  "true" value
+0.785428597336 (error = 3.04339387673e-05)  rectangle
+0.78529423621 (error = 0.000103927187567)   trapezoid
+0.785383810294 (error = 1.43531033447e-05)  simpson
+0.785398164363 (error = 9.65983737444e-10)  adaptive rectangle (quadratures: 27250)
+0.785398162266 (error = 1.13111386923e-09)  adaptive trapezoid (quadratures: 36690)
+0.785398163393 (error = 4.26247925844e-12)  adaptive simpson   (quadratures: 1054)
+Integrating exp(-(x^2))...
+0.746824132812  "true" value
+0.746824899229 (error = 7.66416620279e-07)  rectangle
+0.74682259998 (error = 1.53283228277e-06)   trapezoid
+0.746824132813 (error = 3.1918911958e-13)   simpson
+0.746824133266 (error = 4.53563631098e-10)  adaptive rectangle (quadratures: 14966)
+0.746824132551 (error = 2.61152210967e-10)  adaptive trapezoid (quadratures: 22498)
+0.746824132813 (error = 8.27116153346e-14)  adaptive simpson   (quadratures: 454)
+\end{verbatim}
+
+\chapter{Conclusão}
+
+Esse trabalho apresentou implementações de integração numérica pelo método da quadratura em C++. Foram implementadas as funções do ponto médio, trapezóide e Simpson, assim como o método da quadratura adaptativa. A implementação foi feita utilizando orientação a objetos, expandindo-se a classe \texttt{Optimizer} do trabalho anterior e passando-se as funções para aproximação através do padrão proposto pela biblioteca \texttt{functional} de C++ 11. Também foi introduzido tratamento de exceção para valores \texttt{double} muito pequenos e falhas de convergência.
+
+O programa implementado foi testado utilizando três funções e o comportamento validado através do cálculo do erro de cada método em cada função.
