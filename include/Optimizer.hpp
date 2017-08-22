@@ -14,14 +14,46 @@
 
 //! Numerical optimizer specialized in finding roots, minima and integrals of functions
 class Optimizer {
+ public:
+  enum IntegrationMethod { RECTANGLE, TRAPEZOID, SIMPSON };
+
  private:
   int iterations = 0;
   double error = 0;
   string endReason = "You didn't run any optimization yet!";
 
- public:
-  enum IntegrationMethod { RECTANGLE, TRAPEZOID, SIMPSON };
 
+  //! Adaptive quadrature recursive method
+  //! \param f function to integrate
+  //! \param a the lower bound of the integration interval
+  //! \param b the upper bound of the integration interval
+  //! \param method the Newton-Cotes function to use in the approximation
+  //! \param error
+  //! \return Numerical approximation of the integral of f
+  double innerAdaptiveIntegration(const function<double(double)> &f, double a,
+                                  double b, IntegrationMethod method,
+                                  double error = 1e-12) {
+    iterations += 2;
+    // calculates the middle point between a and b
+    double meio = (b + a) / 2;
+    // uses the integrate method to calculate the value of a single quadrature
+    // vs. the sum of two sub-quadratures
+    double i1 = integrate(f, a, b, 1, method),
+        i2 = integrate(f, a, meio, 1, method) +
+        integrate(f, meio, b, 1, method);
+
+    // if there is error, run adaptive integration in the two sub-divisions of
+    // the current partition
+    if (fabs(i1 - i2) > error) {
+      return innerAdaptiveIntegration(f, a, meio, method, error) +
+          innerAdaptiveIntegration(f, meio, b, method, error);
+    }
+
+    // otherwise, return the most precise value of the two already calculated
+    return i2;
+  }
+
+ public:
   //! \return number of iterations until convergence
   int getIterations() const { return iterations; }
 
@@ -128,15 +160,14 @@ class Optimizer {
   //! \param error minimum tolerance for the search to end
   //! \param max_iters maximum number of iterations
   //! \param learnRate the learning rate of the search
-  //! \param verbose whether to print a short summary of the search at every iteration
-  //! \return a tuple containing the {x, y} points at which the function is minimal
-  std::tuple<double, double> minimize(const std::function<double(double, double)> &f,
-                                      double x,
-                                      double y,
-                                      double error = 1e-8,
-                                      int max_iters = 1000,
-                                      double learnRate = 1,
-                                      bool verbose = false) throw(runtime_error) {
+  //! \param verbose whether to print a short summary of the search at every
+  //! iteration
+  //! \return a tuple containing the {x, y} points at which the function is
+  //! minimal
+  std::tuple<double, double>
+  minimize(const std::function<double(double, double)> &f, double x, double y,
+           double error = 1e-8, int max_iters = 1000, double learnRate = 1,
+           bool verbose = false) throw(runtime_error) {
     endReason = "You didn't run any optimization yet!";
     iterations = 0;
     double dfdx, dfdy;
@@ -159,8 +190,8 @@ class Optimizer {
       y = auy;
 
       if (verbose and iterations % 1000000 == 0) {
-        cout << "x = " << x << ", y = " << y
-             << ", f'(x, y) = (" << dfdx << ", " << dfdy << ")\tIteration " << iterations << endl;
+        cout << "x = " << x << ", y = " << y << ", f'(x, y) = (" << dfdx << ", "
+             << dfdy << ")\tIteration " << iterations << endl;
       }
 
       if (iterations >= max_iters) {
@@ -178,10 +209,15 @@ class Optimizer {
     return {x, y};
   }
 
-  double integrate(const std::function<double(double)> &f,
-                   double low,
-                   double high,
-                   long int points = 40,
+  //! Numerically approximates the integral of a function
+  //! \param f the function to integrate
+  //! \param low the lower bound of the integration interval
+  //! \param high the upper bound of the integration interval
+  //! \param points the number of quadrature points to use in the approximation
+  //! \param method the Newton-Cotes function to use in the approximation
+  //! \return Numerical approximation of the integral of f
+  double integrate(const std::function<double(double)> &f, double low,
+                   double high, long int points = 40,
                    IntegrationMethod method = SIMPSON) throw(runtime_error) {
 
     if (low == high) {
@@ -195,10 +231,14 @@ class Optimizer {
 
     std::function<double(std::function<double(double)>, double, double)> approx;
 
-    if (method == SIMPSON) approx = FunctionUtils::simpsonRule;
-    else if (method == RECTANGLE)approx = FunctionUtils::rectangleRule;
-    else if (method == TRAPEZOID)approx = FunctionUtils::trapezoidRule;
-    else throw runtime_error("Unsupported integration method");
+    if (method == SIMPSON)
+      approx = FunctionUtils::simpsonRule;
+    else if (method == RECTANGLE)
+      approx = FunctionUtils::rectangleRule;
+    else if (method == TRAPEZOID)
+      approx = FunctionUtils::trapezoidRule;
+    else
+      throw runtime_error("Unsupported integration method");
 
     double sum = 0;
     double step = (high - low) / points;
@@ -212,49 +252,18 @@ class Optimizer {
     return sum;
   }
 
-  double adaptiveIntegration(const function<double(double)> &f,
-                             double low,
-                             double high,
-                             IntegrationMethod method,
-                             double result,
-                             double error = 1e-6) throw(runtime_error) {
+  //! Adaptive quadrature method
+  //! \param f function to integrate
+  //! \param a the lower bound of the integration interval
+  //! \param b the upper bound of the integration interval
+  //! \param method the Newton-Cotes function to use in the approximation
+  //! \param error
+  //! \return Numerical approximation of the integral of f
+  double adaptiveIntegration(const function<double(double)> &f, double a,
+                             double b, IntegrationMethod method,
+                             double error = 1e-12) {
     iterations = 0;
-    double x;
-    long int quadratures = 1;
-
-    do {
-      if (iterations > 24)
-        throw runtime_error(
-            "Adaptive integration failed to converge\n\tResult: " + to_string(x) + "\n\tError: "
-                + to_string(this->error) + "\n\tIterations: " + to_string(iterations) + "\n\tQuadratures: "
-                + to_string(quadratures));
-
-      long int oldQuadratures = quadratures;
-      quadratures *= 2;
-      if (oldQuadratures > quadratures)
-        throw runtime_error("Overflow in the number of quadratures");
-
-      iterations ++;
-      x = integrate(f, low, high, quadratures, method);
-      this->error = fabs(x - result);
-    } while (this->error > error);
-    return x;
-  }
-
-  double realAdaptiveIntegration(const function<double(double)> &f,
-                                 double a,
-                                 double b,
-                                 IntegrationMethod method,
-                                 double error = 1e-6) throw(runtime_error) {
-    while (true) {
-      double meio = (b + a) / 2;
-      double i1 = integrate(f, a, b, 1, method),
-          i2 = integrate(f, a, meio, 1, method) + integrate(f, meio, b, 1, method);
-      if (fabs(i1 - i2) > error) {
-        return realAdaptiveIntegration(f, a, meio, method, error) + realAdaptiveIntegration(f, meio, b, method, error);
-      }
-      return i2;
-    }
+    return innerAdaptiveIntegration(f, a, b, method, error);
   }
 };
 
