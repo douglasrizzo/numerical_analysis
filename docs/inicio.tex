@@ -1,0 +1,86 @@
+%!TEX root = latex/refman.tex
+
+\chapter{Introdução}
+
+Este trabalho apresenta a implementação em C++ do cálculo numérico da integral de funções pelo método da quadratura. São implementadas as funções do retângulo ou ponto médio, trapézio e Simpson, assim como o método da quadratura adaptativa. Este trabalho expande o trabalho anterior, adicionando novos métodos para a integração numérica e introduzindo tratamento de exceções para todos os métodos.
+
+\section{Objetivo}
+
+Implementar o método da quadratura numérica para aproximação do valor da integral de uma função em C++, utilizando orientação a objetos e tratamento de exceções.
+
+\chapter{Referencial Teórico}
+
+A integral de uma função \(f(x)\), simbolizada por \(\int f(x)dx\), representa a área \(s\) sob a curva de \(f(x)\) (vide figura \ref{fig:integral}). Existem funções para as quais o cálculo da integral pode ser muito complicado de ser avaliado simbolicamente, ou casos nos quais os valores de \(f(x)\) são conhecidos para valores limitados de \(x\), sem se conhecer exatamente o valor de \(f(x)\). Nestes casos, a integração numérica é uma opção viável para se aproximar o valor desejado.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.5\textwidth]{../integral.pdf}
+  \caption[Integral \(s\) da função \(f(x)\) dos pontos \(a\) a \(b\).]{Integral \(s\) da função \(f(x)\) dos pontos \(a\) a \(b\). Fonte: \protect\cite{wiki:numeint}}
+  \label{fig:integral}
+\end{figure}
+
+A integração pode ser aproximada numericamente através do método da quadratura numérica, no qual a área sob \(f(x)\) é dividida em sub-intervalos aproximados com área conhecida e a área dos sub-intervalos somada, como apresentado na equação \eqref{eq:quadratura}.
+
+\begin{equation}\label{eq:quadratura}
+  \int_a^b f(x)dx \approx \sum_{i=0}^n \alpha_i f(x_i)
+\end{equation}
+
+A aproximação de cada sub-intervalo entre \(a\) e \(b\) pode ser realizada através de uma das fórmulas de Newton-Cotes. A equação \eqref{eq:pontomedio} apresenta a aproximação pelo ponto médio, a qual subdivide a integral em retângulos, como demonstrado graficamente na figura \ref{fig:pontomedio}.
+
+\begin{equation}\label{eq:pontomedio}
+  \int_a^b f(x)dx \approx (b-a) f\left( \frac{a+b}{2} \right)
+\end{equation}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.5\textwidth]{../pontomedio.pdf}
+  \caption[Exemplo do método dos pontos médios para aproximação numérica do valor da integral.]{Exemplo do método dos pontos médios para aproximação numérica do valor da integral. Fonte: \protect\cite{wiki:numeint}}
+  \label{fig:pontomedio}
+\end{figure}
+
+A equação \eqref{eq:trapezio} apresenta o método de aproximação por trapezóides, o qual aproxima a integral conforme demonstrado na figura \ref{fig:trapezoide}. Quando \(f(x)\) consiste de uma função linear, o método do trapezóide é uma aproximação exata de \(\int f(x)dx\).
+
+\begin{equation}\label{eq:trapezio}
+  \int_a^b f(x)dx \approx (b-a) \left( \frac{f(a)+f(b)}{2} \right)
+\end{equation}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.5\textwidth]{../trapezoide.pdf}
+  \caption[Exemplo do método dos trapezóides para aproximação numérica do valor da integral.]{Exemplo do método dos trapezóides para aproximação numérica do valor da integral. Fonte: \protect\cite{wiki:numeint}}
+  \label{fig:trapezoide}
+\end{figure}
+
+O método de Simpson, apresentado na equação \eqref{eq:simpson} e na figura \ref{fig:simpson}, aproxima exatamente a integral de polinômios de 3º grau.
+
+\begin{equation}\label{eq:simpson}
+  \int_a^b f(x)dx \approx (b-a) \left( \frac{f(a) + 4f\left( \frac{a+b}{2} \right) + f(b)}{6} \right)
+\end{equation}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.5\textwidth]{../simpson.pdf}
+  \caption[Exemplo do método de Simpson para aproximação numérica do valor da integral.]{Exemplo do método de Simpson para aproximação numérica do valor da integral. Fonte: \protect\cite{wiki:numeint}}
+  \label{fig:simpson}
+\end{figure}
+
+O uso de intervalos de tamanho fixo pode não ser a melhor prática para integrar funções que possuem oscilações em intervalos específicos. O método da quadratura adaptativa \cite{press_numerical_2007} avalia o erro relativo da aproximação da integral em cada intervalo, dividindo-o em intervalos menores caso necessário. O erro relativo é realizado comparando-se o valor da integral de um intervalo de \(a\) a \(b\) com o valor do mesmo intervalo subdivido em dois. Caso a diferença dos dois valores seja maior que um erro \(\epsilon\), sucessivas divisões podem ser feitas recursivamente em cada intervalo até que \(\epsilon\) seja alcançado. Este método é apresentado no algoritmo \ref{lst:adaptive}.
+
+\begin{algorithm}
+\caption{Quadratura adaptativa}\label{lst:adaptive}
+\begin{algorithmic}[1]
+\Procedure{QuadraturaAdaptativa}{$a, b$}
+\State $m \gets (a + b) / 2$
+\State $I_1 \gets $ \textsc{Quadratura($a, b$)}\Comment{Calcula a área de uma única quadratura}
+\State $I_2 \gets $ \textsc{Quadratura($a, m$)} \(+\) \textsc{Quadratura($m, b$)}\Comment{Soma a área de duas quadraturas menores}
+\If{\(|I_1-I_2| > \epsilon\)}\Comment{Se a diferença nas duas áreas for grande}
+  \State \textbf{return} \textsc{QuadraturaAdaptativa(\(a, m\))}\(+\) \textsc{QuadraturaAdaptativa(\(m, b\))}\Comment{Retorna a soma da subdivisão do intervalo atual}
+\EndIf
+\State \textbf{return} $I_2$ \Comment{Caso contrário, retorna a área das duas quadraturas menores}
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\chapter{Implementação}
+
+Para este trabalho, a classe \texttt{Optimizer} do trabalho anterior foi estendida para realizar a integração numérica de funções. Funções são passadas como argumentos, utilizando os padrões estipulados na biblioteca \texttt{functional} da linguagem C++11. Exceções são disparadas quando os métodos numéricos implementados falham em convergir ou quando o tamanho dos intervalos do método da quadratura se torna pequeno demais para disponibilizar resultados significativos. As exceções são então capturadas e tratadas na função \texttt{main}, a qual executa os testes do programa. A quadratura adaptativa foi implementada utilizando recursividade, sendo cada intervalo avaliado e subdividido por uma mesma função.

@@ -1,0 +1,805 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Numerical analysis algorithms in C++: Referência do Arquivo test/main.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Numerical analysis algorithms in C++
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Busca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funções</a>  </div>
+  <div class="headertitle">
+<div class="title">Referência do Arquivo main.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;iomanip&gt;</code><br />
+<code>#include &lt;sstream&gt;</code><br />
+<code>#include &quot;<a class="el" href="FunctionUtils_8hpp_source.html">FunctionUtils.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Optimizer_8hpp_source.html">Optimizer.hpp</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Gráfico de dependência de inclusões para main.cpp:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp__incl.svg" width="463" height="262"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+<p><a href="main_8cpp_source.html">Vá para o código-fonte deste arquivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funções</h2></td></tr>
+<tr class="memitem:ab4a4174988d22b4b5bb4d7a061c98d06"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ab4a4174988d22b4b5bb4d7a061c98d06">fa</a> (double x)</td></tr>
+<tr class="separator:ab4a4174988d22b4b5bb4d7a061c98d06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1e438fee48cbe65188288e6456b399d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ab1e438fee48cbe65188288e6456b399d">fb</a> (double x)</td></tr>
+<tr class="separator:ab1e438fee48cbe65188288e6456b399d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa63f8af88252d3c7b8752d8706935731"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aa63f8af88252d3c7b8752d8706935731">fc</a> (double x, double y)</td></tr>
+<tr class="separator:aa63f8af88252d3c7b8752d8706935731"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc3e8b365b7cb596704f58e5fa5aca11"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#adc3e8b365b7cb596704f58e5fa5aca11">fd</a> (double x, double y)</td></tr>
+<tr class="memdesc:adc3e8b365b7cb596704f58e5fa5aca11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates Rosenbrock's function.  <a href="#adc3e8b365b7cb596704f58e5fa5aca11">Mais...</a><br /></td></tr>
+<tr class="separator:adc3e8b365b7cb596704f58e5fa5aca11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59ab531b06055de311bedcb43077c100"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a59ab531b06055de311bedcb43077c100">fe</a> (double x)</td></tr>
+<tr class="separator:a59ab531b06055de311bedcb43077c100"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeaf7b66ddfd94481c3bd37ee42f2971"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#abeaf7b66ddfd94481c3bd37ee42f2971">ff</a> (double x)</td></tr>
+<tr class="separator:abeaf7b66ddfd94481c3bd37ee42f2971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0e136f6b5e0e0dcc5f4d27cef7c0eea"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aa0e136f6b5e0e0dcc5f4d27cef7c0eea">fg</a> (double x)</td></tr>
+<tr class="separator:aa0e136f6b5e0e0dcc5f4d27cef7c0eea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3eb23d002f0ee0cdfeb4408d6e0ed6fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a3eb23d002f0ee0cdfeb4408d6e0ed6fb">testSingleRoot</a> (const function&lt; double(double)&gt; &amp;f, double x, double error, int iters, int learnRateFraction)</td></tr>
+<tr class="separator:a3eb23d002f0ee0cdfeb4408d6e0ed6fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed666376ddffba841f7f501bcf2c05af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aed666376ddffba841f7f501bcf2c05af">testRoots</a> (double x, double error, int iters, int learnRateFraction, <a class="el" href="classOptimizer.html">Optimizer</a> &amp;o)</td></tr>
+<tr class="separator:aed666376ddffba841f7f501bcf2c05af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2b1b5902c7452f46fb581ba1d8cb9d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ad2b1b5902c7452f46fb581ba1d8cb9d3">testSingleVariableMinimization</a> (const function&lt; double(double)&gt; &amp;f, double x, double error, int iters, int learnRateFraction)</td></tr>
+<tr class="separator:ad2b1b5902c7452f46fb581ba1d8cb9d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1347d10de51ac5ab2e3cac88e1ef77f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a1347d10de51ac5ab2e3cac88e1ef77f3">testDoubleVariableMinimization</a> (const function&lt; double(double, double)&gt; &amp;f, double x, double y, double error, int iters, int learnRateFraction)</td></tr>
+<tr class="separator:a1347d10de51ac5ab2e3cac88e1ef77f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d9b791e30de68cc45ae7c27a72e7943"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a1d9b791e30de68cc45ae7c27a72e7943">testMinimization</a> (double x, double y, double error, int iters, int learnRateFraction)</td></tr>
+<tr class="separator:a1d9b791e30de68cc45ae7c27a72e7943"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26ceb45bed7e9c29821362755bee348f"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a26ceb45bed7e9c29821362755bee348f"><td class="memTemplItemLeft" align="right" valign="top">std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a26ceb45bed7e9c29821362755bee348f">to_string_with_precision</a> (const T a_value, const int n=12)</td></tr>
+<tr class="separator:a26ceb45bed7e9c29821362755bee348f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeecb1302b8f1cbda95d802930788cb65"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aeecb1302b8f1cbda95d802930788cb65">printWithError</a> (double value, double trueValue)</td></tr>
+<tr class="separator:aeecb1302b8f1cbda95d802930788cb65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17be32f46e8ed8dbbe9a168cbcbbd375"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a17be32f46e8ed8dbbe9a168cbcbbd375">testSingleIntegral</a> (const function&lt; double(double)&gt; &amp;f, double low, double high, int quadratures, double trueValue)</td></tr>
+<tr class="separator:a17be32f46e8ed8dbbe9a168cbcbbd375"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8efb615735344042763dfb3f1aae572"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ae8efb615735344042763dfb3f1aae572">testIntegrals</a> (double low, double high, int quadratures)</td></tr>
+<tr class="separator:ae8efb615735344042763dfb3f1aae572"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
+<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Funções</h2>
+<a id="ab4a4174988d22b4b5bb4d7a061c98d06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4a4174988d22b4b5bb4d7a061c98d06">&#9670;&nbsp;</a></span>fa()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double fa </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>x^2 </dd></dl>
+
+<p class="definition">Definição na linha <a class="el" href="main_8cpp_source.html#l00010">10</a> do arquivo <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ab1e438fee48cbe65188288e6456b399d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1e438fee48cbe65188288e6456b399d">&#9670;&nbsp;</a></span>fb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double fb </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>x ^ 3 - 2x ^ 2 + 2 </dd></dl>
+
+<p class="definition">Definição na linha <a class="el" href="main_8cpp_source.html#l00014">14</a> do arquivo <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa63f8af88252d3c7b8752d8706935731"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa63f8af88252d3c7b8752d8706935731">&#9670;&nbsp;</a></span>fc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double fc </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td></td></tr>
+    <tr><td class="paramname">y</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>(1 - x) ^ 2 + (1 - y) ^ 2 </dd></dl>
+
+<p class="definition">Definição na linha <a class="el" href="main_8cpp_source.html#l00019">19</a> do arquivo <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="adc3e8b365b7cb596704f58e5fa5aca11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc3e8b365b7cb596704f58e5fa5aca11">&#9670;&nbsp;</a></span>fd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double fd </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates Rosenbrock's function. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td></td></tr>
+    <tr><td class="paramname">y</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>(1 - y) ^ 2 + 100(x - y ^ 2) ^ 2 </dd></dl>
+
+<p class="definition">Definição na linha <a class="el" href="main_8cpp_source.html#l00025">25</a> do arquivo <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a59ab531b06055de311bedcb43077c100"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59ab531b06055de311bedcb43077c100">&#9670;&nbsp;</a></span>fe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double fe </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>e^x </dd></dl>
+
+<p class="definition">Definição na linha <a class="el" href="main_8cpp_source.html#l00031">31</a> do arquivo <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="abeaf7b66ddfd94481c3bd37ee42f2971"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abeaf7b66ddfd94481c3bd37ee42f2971">&#9670;&nbsp;</a></span>ff()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double ff </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>sqrt(1 - pow(x, 2)) </dd></dl>
+
+<p class="definition">Definição na linha <a class="el" href="main_8cpp_source.html#l00035">35</a> do arquivo <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa0e136f6b5e0e0dcc5f4d27cef7c0eea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0e136f6b5e0e0dcc5f4d27cef7c0eea">&#9670;&nbsp;</a></span>fg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double fg </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>exp(-x^2) </dd></dl>
+
+<p class="definition">Definição na linha <a class="el" href="main_8cpp_source.html#l00039">39</a> do arquivo <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definição na linha <a class="el" href="main_8cpp_source.html#l00168">168</a> do arquivo <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="dynheader">
+Este é o diagrama das funções utilizadas por esta função:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph.svg" width="306" height="214"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="aeecb1302b8f1cbda95d802930788cb65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeecb1302b8f1cbda95d802930788cb65">&#9670;&nbsp;</a></span>printWithError()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string printWithError </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>trueValue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definição na linha <a class="el" href="main_8cpp_source.html#l00119">119</a> do arquivo <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="dynheader">
+Este é o diagrama das funções utilizadas por esta função:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_aeecb1302b8f1cbda95d802930788cb65_cgraph.svg" width="324" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a1347d10de51ac5ab2e3cac88e1ef77f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1347d10de51ac5ab2e3cac88e1ef77f3">&#9670;&nbsp;</a></span>testDoubleVariableMinimization()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void testDoubleVariableMinimization </td>
+          <td>(</td>
+          <td class="paramtype">const function&lt; double(double, double)&gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>error</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>learnRateFraction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definição na linha <a class="el" href="main_8cpp_source.html#l00082">82</a> do arquivo <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="dynheader">
+Este é o diagrama das funções utilizadas por esta função:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_a1347d10de51ac5ab2e3cac88e1ef77f3_cgraph.svg" width="459" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ae8efb615735344042763dfb3f1aae572"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8efb615735344042763dfb3f1aae572">&#9670;&nbsp;</a></span>testIntegrals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void testIntegrals </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>low</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>high</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>quadratures</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definição na linha <a class="el" href="main_8cpp_source.html#l00157">157</a> do arquivo <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="dynheader">
+Este é o diagrama das funções que utilizam esta função:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_ae8efb615735344042763dfb3f1aae572_icgraph.svg" width="204" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a1d9b791e30de68cc45ae7c27a72e7943"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d9b791e30de68cc45ae7c27a72e7943">&#9670;&nbsp;</a></span>testMinimization()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void testMinimization </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>error</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>learnRateFraction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definição na linha <a class="el" href="main_8cpp_source.html#l00103">103</a> do arquivo <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="dynheader">
+Este é o diagrama das funções que utilizam esta função:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_a1d9b791e30de68cc45ae7c27a72e7943_icgraph.svg" width="227" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="aed666376ddffba841f7f501bcf2c05af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed666376ddffba841f7f501bcf2c05af">&#9670;&nbsp;</a></span>testRoots()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void testRoots </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>error</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>learnRateFraction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classOptimizer.html">Optimizer</a> &amp;&#160;</td>
+          <td class="paramname"><em>o</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definição na linha <a class="el" href="main_8cpp_source.html#l00055">55</a> do arquivo <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="dynheader">
+Este é o diagrama das funções que utilizam esta função:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_aed666376ddffba841f7f501bcf2c05af_icgraph.svg" width="188" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a17be32f46e8ed8dbbe9a168cbcbbd375"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17be32f46e8ed8dbbe9a168cbcbbd375">&#9670;&nbsp;</a></span>testSingleIntegral()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void testSingleIntegral </td>
+          <td>(</td>
+          <td class="paramtype">const function&lt; double(double)&gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>low</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>high</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>quadratures</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>trueValue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definição na linha <a class="el" href="main_8cpp_source.html#l00123">123</a> do arquivo <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="dynheader">
+Este é o diagrama das funções utilizadas por esta função:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_a17be32f46e8ed8dbbe9a168cbcbbd375_cgraph.svg" width="378" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a3eb23d002f0ee0cdfeb4408d6e0ed6fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3eb23d002f0ee0cdfeb4408d6e0ed6fb">&#9670;&nbsp;</a></span>testSingleRoot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void testSingleRoot </td>
+          <td>(</td>
+          <td class="paramtype">const function&lt; double(double)&gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>error</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>learnRateFraction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definição na linha <a class="el" href="main_8cpp_source.html#l00041">41</a> do arquivo <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="dynheader">
+Este é o diagrama das funções utilizadas por esta função:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_a3eb23d002f0ee0cdfeb4408d6e0ed6fb_cgraph.svg" width="363" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ad2b1b5902c7452f46fb581ba1d8cb9d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2b1b5902c7452f46fb581ba1d8cb9d3">&#9670;&nbsp;</a></span>testSingleVariableMinimization()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void testSingleVariableMinimization </td>
+          <td>(</td>
+          <td class="paramtype">const function&lt; double(double)&gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>error</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>learnRateFraction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definição na linha <a class="el" href="main_8cpp_source.html#l00062">62</a> do arquivo <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="dynheader">
+Este é o diagrama das funções utilizadas por esta função:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_ad2b1b5902c7452f46fb581ba1d8cb9d3_cgraph.svg" width="454" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a26ceb45bed7e9c29821362755bee348f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26ceb45bed7e9c29821362755bee348f">&#9670;&nbsp;</a></span>to_string_with_precision()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string to_string_with_precision </td>
+          <td>(</td>
+          <td class="paramtype">const T&#160;</td>
+          <td class="paramname"><em>a_value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>n</em> = <code>12</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definição na linha <a class="el" href="main_8cpp_source.html#l00113">113</a> do arquivo <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="dynheader">
+Este é o diagrama das funções que utilizam esta função:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_a26ceb45bed7e9c29821362755bee348f_icgraph.svg" width="324" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

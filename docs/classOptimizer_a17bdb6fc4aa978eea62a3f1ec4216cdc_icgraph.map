@@ -1,0 +1,9 @@
+<map id="Optimizer::adaptiveIntegration" name="Optimizer::adaptiveIntegration">
+<area shape="rect" id="node2" href="$main_8cpp.html#a3eb23d002f0ee0cdfeb4408d6e0ed6fb" title="testSingleRoot" alt="" coords="297,5,405,32"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#ad2b1b5902c7452f46fb581ba1d8cb9d3" title="testSingleVariableMinimization" alt="" coords="252,56,451,83"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a1347d10de51ac5ab2e3cac88e1ef77f3" title="testDoubleVariableMinimization" alt="" coords="249,107,453,133"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#a17be32f46e8ed8dbbe9a168cbcbbd375" title="testSingleIntegral" alt="" coords="290,157,413,184"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="main" alt="" coords="326,208,377,235"/>
+<area shape="rect" id="node7" href="$classOptimizer.html#a7dc8c48b8f3302b2fedba6e81bc3d4d1" title="Two&#45;dimensional function minimization procedure via the gradient descent method. " alt="" coords="282,259,421,285"/>
+<area shape="rect" id="node8" href="$classOptimizer.html#a183a038337eabc19367932a690ec5c29" title="Numerically approximates the integral of a function. " alt="" coords="283,309,419,336"/>
+</map>
