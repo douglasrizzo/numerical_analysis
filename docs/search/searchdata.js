@@ -24,7 +24,6 @@ var indexSectionNames =
 
 var indexSectionLabels =
 {
-<<<<<<< HEAD
   0: "All",
   1: "Data Structures",
   2: "Files",
@@ -33,15 +32,5 @@ var indexSectionLabels =
   5: "Enumerations",
   6: "Enumerator",
   7: "Pages"
-=======
-  0: "Todos",
-  1: "Estruturas de Dados",
-  2: "Arquivos",
-  3: "Funções",
-  4: "Variáveis",
-  5: "Enumerações",
-  6: "Valores de enumerações",
-  7: "Páginas"
->>>>>>> master
 };
 
