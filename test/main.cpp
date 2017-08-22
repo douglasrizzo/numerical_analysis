@@ -1,3 +1,5 @@
+#include <iomanip>
+#include <sstream>
 #include "FunctionUtils.hpp"
 #include "Optimizer.hpp"
 
@@ -105,6 +107,17 @@ void testMinimization(double x, double y, double error,
   testSingleVariableMinimization(fb, x, error, iters, learnRateFraction);
   testDoubleVariableMinimization(fc, x, y, error, iters, learnRateFraction);
   testDoubleVariableMinimization(fd, x, y, error, iters, learnRateFraction);
+}
+
+template<typename T>
+std::string to_string_with_precision(const T a_value, const int n = 12) {
+  std::ostringstream out;
+  out << std::setprecision(n) << a_value;
+  return out.str();
+}
+
+string printWithError(double value, double trueValue) {
+  return to_string_with_precision(value) + " (error = " + to_string_with_precision(fabs(value - trueValue)) + ")";
 }
 
 void testSingleIntegral(const function<double(double)> &f, double low, double high, int quadratures, double trueValue) {
