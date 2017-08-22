@@ -123,21 +123,32 @@ string printWithError(double value, double trueValue) {
 void testSingleIntegral(const function<double(double)> &f, double low, double high, int quadratures, double trueValue) {
   Optimizer o;
   cout << trueValue << "\t\"true\" value" << endl;
-  cout << o.integrate(f, low, high, quadratures, Optimizer::RECTANGLE) << "\trectangle rule" << endl;
-  cout << o.integrate(f, low, high, quadratures, Optimizer::TRAPEZOID) << "\ttrapezoid rule" << endl;
-  cout << o.integrate(f, low, high, quadratures, Optimizer::SIMPSON) << "\tsimpson rule" << endl;
+  cout << printWithError(o.integrate(f, low, high, quadratures, Optimizer::RECTANGLE), trueValue) << "\trectangle rule"
+       << endl;
+  cout << printWithError(o.integrate(f, low, high, quadratures, Optimizer::TRAPEZOID), trueValue) << "\ttrapezoid rule"
+       << endl;
+  cout << printWithError(o.integrate(f, low, high, quadratures, Optimizer::SIMPSON), trueValue) << "\tsimpson rule"
+       << endl;
+
+  double result;
   try {
-    cout << o.adaptiveIntegration(f, low, high, Optimizer::RECTANGLE, trueValue) << "\tadaptive rectangle rule" << endl;
+    result = o.adaptiveIntegration(f, low, high, Optimizer::RECTANGLE);
+    cout << printWithError(result, trueValue)
+         << "\tadaptive rectangle rule (quadratures: " << o.getIterations() << ")" << endl;
   } catch (const runtime_error &x) {
     cout << x.what() << endl;
   }
   try {
-    cout << o.adaptiveIntegration(f, low, high, Optimizer::TRAPEZOID, trueValue) << "\tadaptive trapezoid rule" << endl;
+    result = o.adaptiveIntegration(f, low, high, Optimizer::TRAPEZOID);
+    cout << printWithError(result, trueValue)
+         << "\tadaptive trapezoid rule (quadratures: " << o.getIterations() << ")" << endl;
   } catch (const runtime_error &x) {
     cout << x.what() << endl;
   }
   try {
-    cout << o.adaptiveIntegration(f, low, high, Optimizer::SIMPSON, trueValue) << "\tadaptive simpson rule" << endl;
+    result = o.adaptiveIntegration(f, low, high, Optimizer::SIMPSON);
+    cout << printWithError(result, trueValue)
+         << "\tadaptive simpson rule (quadratures: " << o.getIterations() << ")" << endl;
   } catch (const runtime_error &x) {
     cout << x.what() << endl;
   }

@@ -47,14 +47,30 @@ class FunctionUtils {
     return (f(x, y) - f(x, y - h)) / h;
   }
 
+  //! The rectangle, or mid-point rule for numerical integration of a function f in an interval between a and b
+  //! \param f the function to be integrated
+  //! \param a the lower bound of the interval
+  //! \param b the upper bound of the interval
+  //! \return numerical approximation of f between a and b according to the rectangle rule
   static double rectangleRule(const std::function<double(double)> &f, double a, double b) {
     return (b - a) * f((a + b) / 2);
   }
+
+  //! Trapezoid rule for numerical integration of a function f in an interval between a and b
+  //! \param f the function to be integrated
+  //! \param a the lower bound of the interval
+  //! \param b the upper bound of the interval
+  //! \return numerical approximation of f between a and b according to the trapezoid rule
 
   static double trapezoidRule(const std::function<double(double)> &f, double a, double b) {
     return (b - a) * (f(a) + f(b)) / 2;
   }
 
+  //! Simpson's rule for numerical integration of a function f in an interval between a and b
+  //! \param f the function to be integrated
+  //! \param a the lower bound of the interval
+  //! \param b the upper bound of the interval
+  //! \return numerical approximation of f between a and b according to Simpson's rule
   static double simpsonRule(const std::function<double(double)> &f, double a, double b) {
     return (b - a) * (f(a) + 4 * f((a + b) / 2) + f(b)) / 6;
   }
