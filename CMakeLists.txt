@@ -6,5 +6,5 @@ set(CMAKE_BUILD_TYPE Debug)
 
 include_directories(include)
 
-set(SOURCE_FILES test/main.cpp include/FunctionUtils.hpp include/Optimizer.hpp)
+set(SOURCE_FILES test/main.cpp include/FunctionUtils.hpp include/Optimizer.hpp include/VolumousObject.hpp)
 add_executable(numerical_analysis ${SOURCE_FILES})

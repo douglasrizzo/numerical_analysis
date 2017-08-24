@@ -38,6 +38,18 @@ double ff(double x) { return sqrt(1 - pow(x, 2)); }
 //! \return exp(-x^2)
 double fg(double x) { return exp(- (x * x)); }
 
+//! \param x
+//! \return 4 / (1 - x * x)
+double fh(double x) { return 4 / (1 + x * x); }
+
+//! \param x
+//! \return sqrt(x + sqrt(x))
+double fi(double x) { return sqrt(x + sqrt(x)); }
+
+bool isInMyToroid(double x, double y, double z) {
+  return x > 1 and y >= - 3 and (z * z) + pow(sqrt((x * x) + (y * y)) - 3, 2) <= 1;
+}
+
 void testSingleRoot(const function<double(double)> &f,
                     double x,
                     double error,
@@ -152,10 +164,17 @@ void testSingleIntegral(const function<double(double)> &f, double low, double hi
   } catch (const runtime_error &x) {
     cout << x.what() << endl;
   }
+  try {
+    result = o.monteCarloIntegration(f, low, high, 100000);
+    cout << printWithError(result, trueValue)
+         << "\tmonte carlo (points: " << o.getIterations() << ")" << endl;
+  } catch (const runtime_error &x) {
+    cout << x.what() << endl;
+  }
 }
 
 void testIntegrals(double low, double high, int quadratures) {
-  double s1 = expm1(1.0), s2 = M_PI_4, s3 = sqrt(M_PI) / 2 * erf(high);
+  double s1 = expm1(1.0), s2 = M_PI_4, s3 = sqrt(M_PI) / 2 * erf(high), s4 = M_PI, s5 = 1.04530130813919;
 
   cout << "Integrating e^x..." << endl;
   testSingleIntegral(fe, low, high, quadratures, s1);
@@ -163,6 +182,24 @@ void testIntegrals(double low, double high, int quadratures) {
   testSingleIntegral(ff, low, high, quadratures, s2);
   cout << "Integrating exp(-(x^2))..." << endl;
   testSingleIntegral(fg, low, high, quadratures, s3);
+  testSingleIntegral(fh, low, high, quadratures, s4);
+  testSingleIntegral(fi, low, high, quadratures, s5);
+}
+
+void testToroid() {
+  VolumousObject toroid;
+  toroid = Optimizer().monteCarloVolume(1, 4, - 3, 4, - 1, 1, isInMyToroid, 10);
+  cout << toroid.toString() << endl;
+  toroid = Optimizer().monteCarloVolume(1, 4, - 3, 4, - 1, 1, isInMyToroid, 100);
+  cout << toroid.toString() << endl;
+  toroid = Optimizer().monteCarloVolume(1, 4, - 3, 4, - 1, 1, isInMyToroid, 1000);
+  cout << toroid.toString() << endl;
+  toroid = Optimizer().monteCarloVolume(1, 4, - 3, 4, - 1, 1, isInMyToroid, 10000);
+  cout << toroid.toString() << endl;
+  toroid = Optimizer().monteCarloVolume(1, 4, - 3, 4, - 1, 1, isInMyToroid, 100000);
+  cout << toroid.toString() << endl;
+  toroid = Optimizer().monteCarloVolume(1, 4, - 3, 4, - 1, 1, isInMyToroid, 1000000);
+  cout << toroid.toString() << endl;
 }
 
 int main() {
@@ -173,9 +210,9 @@ int main() {
   int quadratures = 200;
   Optimizer o;
 
-  testRoots(x, error, iters, learnRateFraction, o);
-  testMinimization(x, y, error, iters, learnRateFraction);
-  testIntegrals(low, high, quadratures);
-
+//  testRoots(x, error, iters, learnRateFraction, o);
+//  testMinimization(x, y, error, iters, learnRateFraction);
+//  testIntegrals(low, high, quadratures);
+  testToroid();
   return 0;
 }

@@ -8,9 +8,12 @@
 #define NUMERICAL_ANALYSIS_OPTIMIZER_HPP
 
 #include "FunctionUtils.hpp"
+#include "VolumousObject.hpp"
 #include <cmath>
 #include <functional>
 #include <iostream>
+#include <random>
+#include <chrono>
 
 //! Numerical optimizer specialized in finding roots, minima and integrals of functions
 class Optimizer {
@@ -20,8 +23,31 @@ class Optimizer {
  private:
   int iterations = 0;
   double error = 0;
+  mt19937_64 myMersenne;
+  uniform_real_distribution<double> myUniformDistribution;
+
   string endReason = "You didn't run any optimization yet!";
 
+  //! Pseudo-random number generator using the Mersenne Twister method
+  //! \return double between 0 and 1
+  double myRandom() {
+    return myUniformDistribution(myMersenne);
+  }
+
+  //! Pseudo-random number generator using the Mersenne Twister method
+  //! \param min the lower bound for the random number
+  //! \param max the upper bound for the random number
+  //! \return double between min and max
+  double myRandom(double min, double max) {
+    return myRandom() * (max - min) + min;
+  }
+
+  //! Pseudo-random number generator using the Mersenne Twister method
+  //! \param max the upper bound for the random number
+  //! \return double between 0 and max
+  double myRandom(double max) {
+    return myRandom() * max;
+  }
 
   //! Adaptive quadrature recursive method
   //! \param f function to integrate
@@ -54,6 +80,12 @@ class Optimizer {
   }
 
  public:
+  Optimizer() {
+    auto seed = chrono::high_resolution_clock::now().time_since_epoch().count();
+    myMersenne = mt19937_64(seed);
+    myUniformDistribution = std::uniform_real_distribution<double>(0, 1);
+  }
+
   //! \return number of iterations until convergence
   int getIterations() const { return iterations; }
 
@@ -264,6 +296,70 @@ class Optimizer {
                              double error = 1e-12) {
     iterations = 0;
     return innerAdaptiveIntegration(f, a, b, method, error);
+  }
+
+  double monteCarloIntegration(const std::function<double(double)> &f, double low,
+                               double high, long int points = 40) throw(runtime_error) {
+
+    if (low == high) {
+      throw runtime_error("Lower bound of integration = Higher bound");
+    }
+    if (low > high) {
+      double temp = low;
+      low = high;
+      high = temp;
+    }
+
+    double sum = 0;
+
+    for (int i = 0; i < points; i ++) {
+      double orelha = myRandom(low, high);
+      sum += f(myRandom(low, high));
+    }
+    iterations = points;
+    return sum / points;
+  }
+
+  VolumousObject monteCarloVolume(double xLow,
+                                  double xHigh,
+                                  double yLow,
+                                  double yHigh,
+                                  double zLow,
+                                  double zHigh,
+                                  const function<bool(double, double, double)> &isInside,
+                                  long int points) {
+    VolumousObject obj;
+    // nbr of pts inside the object
+    int pointsInside = 0;
+    // sum of the x, y and z coordinates of the pts inside the object
+    // useful for center of mass later
+    double xSum = 0, ySum = 0, zSum = 0;
+    for (long int i = 0; i < points; i ++) {
+      double x = myRandom(xLow, xHigh);
+      double y = myRandom(yLow, yHigh);
+      double z = myRandom(zLow, zHigh);
+
+      if (isInside(x, y, z)) {
+        pointsInside ++;
+        xSum += x;
+        ySum += y;
+        zSum += z;
+      }
+    }
+
+    // volume of the enclosing cube
+    double cubeVolume = (xHigh - xLow) * (yHigh - yLow) * (zHigh - zLow);
+    // estimated volume of our object
+    obj.setVolume(cubeVolume * pointsInside / points);
+    //weight due to gravity
+    obj.setWeight(obj.getVolume() * 9.8);
+
+    // center of mass in the three coordinates
+    obj.getCenterOfMass().setX(xSum / pointsInside);
+    obj.getCenterOfMass().setY(ySum / pointsInside);
+    obj.getCenterOfMass().setZ(zSum / pointsInside);
+
+    return obj;
   }
 };
 
