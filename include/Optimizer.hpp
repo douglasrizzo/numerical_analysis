@@ -103,7 +103,7 @@ class Optimizer {
   //! \param learnRate the learning rate of the search
   //! \param verbose whether to print a short summary of the search at every iteration
   //! \return the point at which the function intercepts the x-axis
-  double findRoot(const std::function<double(double)> &f, double x,
+  double findRoot(const function<double(double)> &f, double x,
                   double error = 1e-8, int max_iters = 1000,
                   double learnRate = 1, bool verbose = false) throw(runtime_error) {
     endReason = "You didn't run any optimization yet!";
@@ -147,7 +147,7 @@ class Optimizer {
   //! \param learnRate the learning rate of the search
   //! \param verbose whether to print a short summary of the search at every iteration
   //! \return the point at which the function is minimal
-  double minimize(const std::function<double(double)> &f,
+  double minimize(const function<double(double)> &f,
                   double x,
                   double error = 1e-8, int max_iters = 1000,
                   double learnRate = 1, bool verbose = false) throw(runtime_error) {
@@ -196,8 +196,8 @@ class Optimizer {
   //! iteration
   //! \return a tuple containing the {x, y} points at which the function is
   //! minimal
-  std::tuple<double, double>
-  minimize(const std::function<double(double, double)> &f, double x, double y,
+  tuple<double, double>
+  minimize(const function<double(double, double)> &f, double x, double y,
            double error = 1e-8, int max_iters = 1000, double learnRate = 1,
            bool verbose = false) throw(runtime_error) {
     endReason = "You didn't run any optimization yet!";
@@ -248,7 +248,7 @@ class Optimizer {
   //! \param points the number of quadrature points to use in the approximation
   //! \param method the Newton-Cotes function to use in the approximation
   //! \return Numerical approximation of the integral of f
-  double integrate(const std::function<double(double)> &f, double low,
+  double integrate(const function<double(double)> &f, double low,
                    double high, long int points = 40,
                    IntegrationMethod method = SIMPSON) throw(runtime_error) {
 
@@ -298,7 +298,7 @@ class Optimizer {
     return innerAdaptiveIntegration(f, a, b, method, error);
   }
 
-  double monteCarloIntegration(const std::function<double(double)> &f, double low,
+  double monteCarloIntegration(const function<double(double)> &f, double low,
                                double high, long int points = 40) throw(runtime_error) {
 
     if (low == high) {
@@ -329,7 +329,7 @@ class Optimizer {
                                   const function<bool(double, double, double)> &isInside,
                                   long int points) {
     VolumousObject obj;
-    // nbr of pts inside the object
+    // number of pts inside the object
     int pointsInside = 0;
     // sum of the x, y and z coordinates of the pts inside the object
     // useful for center of mass later
