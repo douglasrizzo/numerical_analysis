@@ -25,7 +25,7 @@ class Optimizer {
   double error = 0;
   mt19937_64 myMersenne;
   uniform_real_distribution<double> myUniformDistribution;
-
+  float executionTime;
   string endReason = "You didn't run any optimization yet!";
 
   //! Pseudo-random number generator using the Mersenne Twister method
@@ -80,10 +80,12 @@ class Optimizer {
   }
 
  public:
+  using clock = chrono::high_resolution_clock;
+  
   Optimizer() {
-    auto seed = chrono::high_resolution_clock::now().time_since_epoch().count();
+    auto seed = clock::now().time_since_epoch().count();
     myMersenne = mt19937_64(seed);
-    myUniformDistribution = std::uniform_real_distribution<double>(0, 1);
+    myUniformDistribution = uniform_real_distribution<double>(0, 1);
   }
 
   //! \return number of iterations until convergence
@@ -110,6 +112,7 @@ class Optimizer {
     iterations = 0;
     double f_val;
 
+    auto start = clock::now();
     while (true) {
       f_val = f(x);
       double aux = x + learnRate * - f_val / FunctionUtils::derivative(f, x);
@@ -135,6 +138,7 @@ class Optimizer {
         break;
       }
     }
+    endClock(start);
     this->error = fabs(f_val);
     return x;
   }
@@ -155,6 +159,7 @@ class Optimizer {
     iterations = 0;
     double d;
 
+    auto start = clock::now();
     while (true) {
       d = FunctionUtils::derivative(f, x);
       double aux = x - learnRate * d;
@@ -180,6 +185,7 @@ class Optimizer {
         break;
       }
     }
+    endClock(start);
     this->error = fabs(d);
 
     return x;
@@ -204,6 +210,7 @@ class Optimizer {
     iterations = 0;
     double dfdx, dfdy;
 
+    auto start = clock::now();
     while (true) {
       dfdx = FunctionUtils::partialDerivative(f, x, y, 0);
       dfdy = FunctionUtils::partialDerivative(f, x, y, 1);
@@ -238,6 +245,7 @@ class Optimizer {
     }
     this->error = (fabs(dfdx) + fabs(dfdy) / 2);
 
+    endClock(start);
     return {x, y};
   }
 
@@ -261,7 +269,7 @@ class Optimizer {
       high = temp;
     }
 
-    std::function<double(std::function<double(double)>, double, double)> approx;
+    function<double(function<double(double)>, double, double)> approx;
 
     if (method == SIMPSON)
       approx = FunctionUtils::simpsonRule;
@@ -272,6 +280,8 @@ class Optimizer {
     else
       throw runtime_error("Unsupported integration method");
 
+    auto start = clock::now();
+
     double sum = 0;
     double step = (high - low) / points;
 
@@ -281,6 +291,7 @@ class Optimizer {
     for (int i = 0; i < points; i ++)
       sum += approx(f, low + (i * step), low + ((i + 1) * step));
 
+    endClock(start);
     return sum;
   }
 
@@ -312,12 +323,23 @@ class Optimizer {
 
     double sum = 0;
 
+    auto start = clock::now();
+
     for (int i = 0; i < points; i ++) {
       double orelha = myRandom(low, high);
       sum += f(myRandom(low, high));
     }
+    endClock(start);
+
     iterations = points;
     return sum / points;
+  }
+
+  void endClock(chrono::time_point<chrono::system_clock> start) {
+    chrono::time_point<chrono::system_clock> end = clock::now();
+    chrono::duration<float> execution_time = end - start;
+
+    this->executionTime = execution_time.count();
   }
 
   VolumousObject monteCarloVolume(double xLow,
@@ -334,6 +356,9 @@ class Optimizer {
     // sum of the x, y and z coordinates of the pts inside the object
     // useful for center of mass later
     double xSum = 0, ySum = 0, zSum = 0;
+
+    auto start = clock::now();
+
     for (long int i = 0; i < points; i ++) {
       double x = myRandom(xLow, xHigh);
       double y = myRandom(yLow, yHigh);
@@ -347,19 +372,31 @@ class Optimizer {
       }
     }
 
+    double pctInside = pointsInside / (double) points;
+
     // volume of the enclosing cube
     double cubeVolume = (xHigh - xLow) * (yHigh - yLow) * (zHigh - zLow);
     // estimated volume of our object
-    obj.setVolume(cubeVolume * pointsInside / points);
+    obj.setVolume(cubeVolume * pctInside);
     //weight due to gravity
-    obj.setWeight(obj.getVolume() * 9.8);
+    obj.setWeight(obj.getVolume());
+
+    // according to Numerical Recipes, a suitable error measure is +/- 1 standard deviation
+    error = cubeVolume * sqrt((pctInside - pow(pctInside, 2.0f)) / points);
+    obj.setError(error);
 
     // center of mass in the three coordinates
     obj.getCenterOfMass().setX(xSum / pointsInside);
     obj.getCenterOfMass().setY(ySum / pointsInside);
     obj.getCenterOfMass().setZ(zSum / pointsInside);
 
+    endClock(start);
+
     return obj;
+  }
+
+  float getExecutionTime() const {
+    return executionTime;
   }
 };
 

@@ -52,12 +52,12 @@ class Point3D {
 
 class VolumousObject {
  private:
-  double volume, weight;
+  double volume, weight, error;
   Point3D centerOfMass;
  public:
 
   VolumousObject() {
-    volume = weight = 0;
+    volume = weight = error = 0;
   }
 
   double getVolume() const {
@@ -65,7 +65,7 @@ class VolumousObject {
   }
 
   void setVolume(double volume) {
-    VolumousObject::volume = volume;
+    this->volume = volume;
   }
 
   double getWeight() const {
@@ -73,7 +73,7 @@ class VolumousObject {
   }
 
   void setWeight(double weight) {
-    VolumousObject::weight = weight;
+    this->weight = weight;
   }
 
   Point3D &getCenterOfMass() {
@@ -81,12 +81,18 @@ class VolumousObject {
   }
 
   void setCenterOfMass(const Point3D &centerOfMass) {
-    VolumousObject::centerOfMass = centerOfMass;
+    this->centerOfMass = centerOfMass;
   }
+
+  void setError(double error) {
+    this->error = error;
+  }
+
+  double getError() { return this->error; }
 
   std::string toString() {
     return "Object details:\n\tVolume: " + std::to_string(volume) + "\n\tWeight:" + std::to_string(weight)
-        + "\nCenter of mass:\n" + centerOfMass.toString();
+        + "\n\tError:" + std::to_string(error) + "\nCenter of mass:\n" + centerOfMass.toString();
   }
 };
 

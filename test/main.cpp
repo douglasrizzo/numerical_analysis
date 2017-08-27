@@ -187,19 +187,14 @@ void testIntegrals(double low, double high, int quadratures) {
 }
 
 void testToroid() {
-  VolumousObject toroid;
-  toroid = Optimizer().monteCarloVolume(1, 4, - 3, 4, - 1, 1, isInMyToroid, 10);
-  cout << toroid.toString() << endl;
-  toroid = Optimizer().monteCarloVolume(1, 4, - 3, 4, - 1, 1, isInMyToroid, 100);
-  cout << toroid.toString() << endl;
-  toroid = Optimizer().monteCarloVolume(1, 4, - 3, 4, - 1, 1, isInMyToroid, 1000);
-  cout << toroid.toString() << endl;
-  toroid = Optimizer().monteCarloVolume(1, 4, - 3, 4, - 1, 1, isInMyToroid, 10000);
-  cout << toroid.toString() << endl;
-  toroid = Optimizer().monteCarloVolume(1, 4, - 3, 4, - 1, 1, isInMyToroid, 100000);
-  cout << toroid.toString() << endl;
-  toroid = Optimizer().monteCarloVolume(1, 4, - 3, 4, - 1, 1, isInMyToroid, 1000000);
-  cout << toroid.toString() << endl;
+  for (int i = 1; i <= 8; i ++) {
+    double points = pow(10, i);
+    Optimizer o;
+    VolumousObject toroid = o.monteCarloVolume(1, 4, - 3, 4, - 1, 1, isInMyToroid, points);
+    cout << "Number of points: " << points << endl;
+    cout << "Execution time: " << o.getExecutionTime() << endl;
+    cout << toroid.toString() << endl;
+  }
 }
 
 int main() {
