@@ -14,6 +14,7 @@
 #include <iostream>
 #include <random>
 #include <chrono>
+#include <omp.h>
 
 //! Numerical optimizer specialized in finding roots, minima and integrals of functions
 class Optimizer {
@@ -25,7 +26,7 @@ class Optimizer {
   double error = 0;
   mt19937_64 myMersenne;
   uniform_real_distribution<double> myUniformDistribution;
-  float executionTime;
+  float executionTime{};
   string endReason = "You didn't run any optimization yet!";
 
   //! Pseudo-random number generator using the Mersenne Twister method
@@ -81,11 +82,19 @@ class Optimizer {
 
  public:
   using clock = chrono::high_resolution_clock;
-  
+
   Optimizer() {
+    executionTime = 0;
     auto seed = clock::now().time_since_epoch().count();
     myMersenne = mt19937_64(seed);
     myUniformDistribution = uniform_real_distribution<double>(0, 1);
+  }
+
+  void endClock(chrono::time_point <chrono::system_clock> start) {
+    chrono::time_point <chrono::system_clock> end = clock::now();
+    chrono::duration<float> execution_time = end - start;
+
+    this->executionTime = execution_time.count();
   }
 
   //! \return number of iterations until convergence
@@ -288,6 +297,7 @@ class Optimizer {
     if (step < 1e-8)
       throw runtime_error("Step size of " + to_string(step) + " is too small to be precise");
 
+#pragma omp parallel for reduction(+:sum)
     for (int i = 0; i < points; i ++)
       sum += approx(f, low + (i * step), low + ((i + 1) * step));
 
@@ -325,21 +335,15 @@ class Optimizer {
 
     auto start = clock::now();
 
+#pragma omp parallel for reduction(+:sum)
     for (int i = 0; i < points; i ++) {
-      double orelha = myRandom(low, high);
-      sum += f(myRandom(low, high));
+      double sample = f(myRandom(low, high));
+      sum += sample;
     }
-    endClock(start);
 
+    endClock(start);
     iterations = points;
     return sum / points;
-  }
-
-  void endClock(chrono::time_point<chrono::system_clock> start) {
-    chrono::time_point<chrono::system_clock> end = clock::now();
-    chrono::duration<float> execution_time = end - start;
-
-    this->executionTime = execution_time.count();
   }
 
   VolumousObject monteCarloVolume(double xLow,
@@ -359,6 +363,7 @@ class Optimizer {
 
     auto start = clock::now();
 
+#pragma omp parallel for reduction(+:xSum) reduction(+:ySum) reduction(+:zSum) reduction(+:pointsInside)
     for (long int i = 0; i < points; i ++) {
       double x = myRandom(xLow, xHigh);
       double y = myRandom(yLow, yHigh);
@@ -386,6 +391,7 @@ class Optimizer {
     obj.setError(error);
 
     // center of mass in the three coordinates
+    // density = 1 everywhere, so it's a straightforward sum
     obj.getCenterOfMass().setX(xSum / pointsInside);
     obj.getCenterOfMass().setY(ySum / pointsInside);
     obj.getCenterOfMass().setZ(zSum / pointsInside);
