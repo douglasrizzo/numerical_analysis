@@ -46,6 +46,11 @@ double fh(double x) { return 4 / (1 + x * x); }
 //! \return sqrt(x + sqrt(x))
 double fi(double x) { return sqrt(x + sqrt(x)); }
 
+//! Function that defines a toroid in relation to its cartesian coordinates
+//! \param x
+//! \param y
+//! \param z
+//! \return true if {x, y, z} is contained inside the toroid, otherwise false
 bool isInMyToroid(double x, double y, double z) {
   return x > 1 and y >= - 3 and (z * z) + pow(sqrt((x * x) + (y * y)) - 3, 2) <= 1;
 }
@@ -134,40 +139,46 @@ string printWithError(double value, double trueValue) {
 
 void testSingleIntegral(const function<double(double)> &f, double low, double high, int quadratures, double trueValue) {
   Optimizer o;
-  cout << trueValue << "\t\"true\" value" << endl;
-  cout << printWithError(o.integrate(f, low, high, quadratures, Optimizer::RECTANGLE), trueValue) << "\trectangle rule"
-       << endl;
-  cout << printWithError(o.integrate(f, low, high, quadratures, Optimizer::TRAPEZOID), trueValue) << "\ttrapezoid rule"
-       << endl;
-  cout << printWithError(o.integrate(f, low, high, quadratures, Optimizer::SIMPSON), trueValue) << "\tsimpson rule"
-       << endl;
-
   double result;
+  cout << trueValue << "\t\"true\" value" << endl;
+  result = o.integrate(f, low, high, quadratures, Optimizer::RECTANGLE);
+  cout << printWithError(result, trueValue) << "\trectangle rule (time: " << o.getExecutionTime() << ")" << endl;
+  result = o.integrate(f, low, high, quadratures, Optimizer::TRAPEZOID);
+  cout << printWithError(result, trueValue) << "\ttrapezoid rule (time: " << o.getExecutionTime() << ")" << endl;
+  result = o.integrate(f, low, high, quadratures, Optimizer::SIMPSON);
+  cout << printWithError(result, trueValue) << "\tsimpson rule (time: " << o.getExecutionTime() << ")" << endl;
+
   try {
     result = o.adaptiveIntegration(f, low, high, Optimizer::RECTANGLE);
     cout << printWithError(result, trueValue)
-         << "\tadaptive rectangle rule (quadratures: " << o.getIterations() << ")" << endl;
+         << "\tadaptive rectangle rule (quadratures: " << o.getIterations() << ", time: " << o.getExecutionTime() << ")"
+         << endl;
   } catch (const runtime_error &x) {
     cout << x.what() << endl;
   }
   try {
     result = o.adaptiveIntegration(f, low, high, Optimizer::TRAPEZOID);
     cout << printWithError(result, trueValue)
-         << "\tadaptive trapezoid rule (quadratures: " << o.getIterations() << ")" << endl;
+         << "\tadaptive trapezoid rule (quadratures: " << o.getIterations() << ", time: " << o.getExecutionTime() << ")"
+         << endl;
   } catch (const runtime_error &x) {
     cout << x.what() << endl;
   }
   try {
     result = o.adaptiveIntegration(f, low, high, Optimizer::SIMPSON);
     cout << printWithError(result, trueValue)
-         << "\tadaptive simpson rule (quadratures: " << o.getIterations() << ")" << endl;
+         << "\tadaptive simpson rule (quadratures: " << o.getIterations() << ", time: " << o.getExecutionTime() << ")"
+         << endl;
   } catch (const runtime_error &x) {
     cout << x.what() << endl;
   }
   try {
-    result = o.monteCarloIntegration(f, low, high, 100000);
-    cout << printWithError(result, trueValue)
-         << "\tmonte carlo (points: " << o.getIterations() << ")" << endl;
+    for (int i = 1; i <= 8; i ++) {
+      double points = pow(10, i);
+      result = o.monteCarloIntegration(f, low, high, points);
+      cout << printWithError(result, trueValue)
+           << "\tmonte carlo (points: " << o.getIterations() << ", time: " << o.getExecutionTime() << ")" << endl;
+    }
   } catch (const runtime_error &x) {
     cout << x.what() << endl;
   }
@@ -193,7 +204,7 @@ void testToroid() {
     VolumousObject toroid = o.monteCarloVolume(1, 4, - 3, 4, - 1, 1, isInMyToroid, points);
     cout << "Number of points: " << points << endl;
     cout << "Execution time: " << o.getExecutionTime() << endl;
-    cout << toroid.toString() << endl;
+//    cout << toroid.toString() << endl;
   }
 }
 
@@ -202,12 +213,12 @@ int main() {
   double x = 2, y = 2, error = 1e-50, low = 0, high = 1;
   int iters = 1000000;
   int learnRateFraction = 100;
-  int quadratures = 200;
+  int quadratures = 1000000;
   Optimizer o;
 
 //  testRoots(x, error, iters, learnRateFraction, o);
 //  testMinimization(x, y, error, iters, learnRateFraction);
-//  testIntegrals(low, high, quadratures);
+  testIntegrals(low, high, quadratures);
   testToroid();
   return 0;
 }
