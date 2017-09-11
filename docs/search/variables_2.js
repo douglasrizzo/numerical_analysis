@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sqrtmachineepsilon',['sqrtMachineEpsilon',['../classFunctionUtils.html#ade268010b53e9697999443dc75e78b02',1,'FunctionUtils']]]
+  ['iterations',['iterations',['../classOptimizer.html#a3ba154162db83bde106d9d90f1895de6',1,'Optimizer']]]
 ];

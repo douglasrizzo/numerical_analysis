@@ -1,6 +1,5 @@
 <map id="main" name="main">
-<area shape="rect" id="node2" href="$classOptimizer.html#a17bdb6fc4aa978eea62a3f1ec4216cdc" title="Adaptive quadrature method. " alt="" coords="104,29,300,56"/>
-<area shape="rect" id="node3" href="$main_8cpp.html#aed666376ddffba841f7f501bcf2c05af" title="testRoots" alt="" coords="163,80,241,107"/>
-<area shape="rect" id="node4" href="$main_8cpp.html#a1d9b791e30de68cc45ae7c27a72e7943" title="testMinimization" alt="" coords="143,131,261,157"/>
-<area shape="rect" id="node5" href="$main_8cpp.html#ae8efb615735344042763dfb3f1aae572" title="testIntegrals" alt="" coords="155,181,249,208"/>
+<area shape="rect" id="node2" href="$classOptimizer.html#aa626db2b39521740bf10c20aec3c57ac" title="Optimizer::getExecutionTime" alt="" coords="247,29,437,56"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#ae8efb615735344042763dfb3f1aae572" title="testIntegrals" alt="" coords="104,29,199,56"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#aa08c7ea573265b34dee0c10024829973" title="testToroid" alt="" coords="112,80,191,107"/>
 </map>

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['readme_2emd',['README.md',['../README_8md.html',1,'']]],
-  ['rectangle',['RECTANGLE',['../classOptimizer.html#aeed756c832dc799bfed7dd854d3d8d4faaf95d51084ad8818cea6a3868d108619',1,'Optimizer']]],
-  ['rectanglerule',['rectangleRule',['../classFunctionUtils.html#a74595fc3dd75c100e64bfc2260a8322d',1,'FunctionUtils']]]
+  ['partialderivative',['partialDerivative',['../classFunctionUtils.html#a0eb835a97406d0d5a731cd833b311776',1,'FunctionUtils']]],
+  ['point3d',['Point3D',['../classPoint3D.html',1,'Point3D'],['../classPoint3D.html#a0e7bbbad6dc4316a9e17d9c4d17c8016',1,'Point3D::Point3D()'],['../classPoint3D.html#a4ab689160e40d1052d18d4eb96b37419',1,'Point3D::Point3D(double x, double y, double z)']]],
+  ['printwitherror',['printWithError',['../main_8cpp.html#aeecb1302b8f1cbda95d802930788cb65',1,'main.cpp']]]
 ];

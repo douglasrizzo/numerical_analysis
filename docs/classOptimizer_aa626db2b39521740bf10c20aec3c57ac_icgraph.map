@@ -1,0 +1,13 @@
+<map id="Optimizer::getExecutionTime" name="Optimizer::getExecutionTime">
+<area shape="rect" id="node2" href="$main_8cpp.html#a3eb23d002f0ee0cdfeb4408d6e0ed6fb" title="testSingleRoot" alt="" coords="297,5,405,32"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#ad2b1b5902c7452f46fb581ba1d8cb9d3" title="testSingleVariableMinimization" alt="" coords="252,56,451,83"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a1347d10de51ac5ab2e3cac88e1ef77f3" title="testDoubleVariableMinimization" alt="" coords="249,107,453,133"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#a17be32f46e8ed8dbbe9a168cbcbbd375" title="testSingleIntegral" alt="" coords="290,157,413,184"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#aa08c7ea573265b34dee0c10024829973" title="testToroid" alt="" coords="312,208,391,235"/>
+<area shape="rect" id="node7" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="main" alt="" coords="507,233,557,260"/>
+<area shape="rect" id="node8" href="$classOptimizer.html#a811cf938081629ba6c34ee30d2438137" title="Two&#45;dimensional function minimization procedure via the gradient descent method. " alt="" coords="282,309,421,336"/>
+<area shape="rect" id="node9" href="$classOptimizer.html#a541dc375f9550e9266b3fc41ea7250f4" title="Numerically approximates the integral of a function. " alt="" coords="283,360,419,387"/>
+<area shape="rect" id="node10" href="$classOptimizer.html#a17bdb6fc4aa978eea62a3f1ec4216cdc" title="Adaptive quadrature method. " alt="" coords="253,411,449,437"/>
+<area shape="rect" id="node11" href="$classOptimizer.html#a44bb366370b96cf611eec59a8a13a3fa" title="Optimizer::monteCarloIntegration" alt="" coords="244,461,459,488"/>
+<area shape="rect" id="node12" href="$classOptimizer.html#a981e7e969e70346bfe09ab0acb25206f" title="Optimizer::monteCarloVolume" alt="" coords="253,512,449,539"/>
+</map>
